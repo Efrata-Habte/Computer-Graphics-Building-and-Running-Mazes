@@ -37,7 +37,7 @@ def main():
     pygame.time.delay(1000)
 
     # Maze Solving
-    # This shows the red dot moving and blue dots marking dead ends
+    # This shows the red dot moving and yellow dots marking dead ends
     print("Starting solver...")
     maze.solve_labyrinth(screen)
 
