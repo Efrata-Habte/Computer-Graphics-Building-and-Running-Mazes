@@ -127,3 +127,18 @@ class Labyrinth:
             if not moved:
                 self.dead_end_markers.add(solve_stack.pop())
         return False
+    
+    def create_cycles(self, probability=20):
+        # 1 in 20 chance to eat an extra wall
+        for r in range(1, self.rows):
+            for c in range(1, self.cols):
+                if random.randint(1, probability) == 1:
+                    if random.choice([True, False]):
+                        self.north_wall[r][c] = 0
+                    else:
+                        self.east_wall[r][c] = 0
+
+    def check_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit(); sys.exit()
