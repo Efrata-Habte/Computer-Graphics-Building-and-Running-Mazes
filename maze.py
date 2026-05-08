@@ -92,3 +92,38 @@ class Labyrinth:
             self.refresh_view(screen, current=(curr_r, curr_c))
             pygame.time.delay(20)
     
+
+    def solve_labyrinth(self, screen):
+        solve_stack = [self.entrance]
+        solved_visited = [[False for _ in range(self.cols)] for _ in range(self.rows)]
+        solved_visited[self.entrance[0]][self.entrance[1]] = True
+
+        while solve_stack:
+            self.check_events()
+            curr = solve_stack[-1]
+            self.final_route = list(solve_stack)
+            self.refresh_view(screen, current=curr)
+            pygame.time.delay(40)
+
+            if curr == self.exit: return True
+
+            r, c = curr
+            accessible = []
+            # Check if walls are missing (0 means wall is eaten/gone)
+            if r > 0 and not self.north_wall[r][c]: accessible.append((r-1, c))
+            if r < self.rows-1 and not self.north_wall[r+1][c]: accessible.append((r+1, c))
+            if c > 0 and not self.east_wall[r][c]: accessible.append((r, c-1))
+            if c < self.cols-1 and not self.east_wall[r][c+1]: accessible.append((r, c+1))
+
+            random.shuffle(accessible)
+            moved = False
+            for nr, nc in accessible:
+                if not solved_visited[nr][nc]:
+                    solved_visited[nr][nc] = True
+                    solve_stack.append((nr, nc))
+                    moved = True
+                    break
+            
+            if not moved:
+                self.dead_end_markers.add(solve_stack.pop())
+        return False
