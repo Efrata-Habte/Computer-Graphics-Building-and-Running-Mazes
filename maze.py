@@ -1,7 +1,18 @@
 import pygame
 import random
 import sys
-from const import CELL_SIZE, WHITE, BLACK, RED, BLUE, GREEN, WIDTH, HEIGHT
+
+CELL_SIZE = 30
+WHITE = (255, 255, 255)
+BLACK = (35, 35, 35)
+RED = (255, 0, 0)
+BLUE = (50, 100, 255)
+GREEN = (0, 255, 0)
+ROWS = 25
+COLS = 25
+WIDTH = COLS * CELL_SIZE
+HEIGHT = ROWS * CELL_SIZE
+FPS = 60
 
 class Labyrinth:
     def __init__(self, R, C):
@@ -91,8 +102,8 @@ class Labyrinth:
             
             self.refresh_view(screen, current=(curr_r, curr_c))
             pygame.time.delay(20)
-    
 
+    
     def solve_labyrinth(self, screen):
         solve_stack = [self.entrance]
         solved_visited = [[False for _ in range(self.cols)] for _ in range(self.rows)]
@@ -128,6 +139,7 @@ class Labyrinth:
                 self.dead_end_markers.add(solve_stack.pop())
         return False
     
+
     def create_cycles(self, probability=20):
         # 1 in 20 chance to eat an extra wall
         for r in range(1, self.rows):
