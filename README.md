@@ -97,6 +97,13 @@ You can modify the constants in `main.py` and `maze.py`:
 - Animation delays in `generate_labyrinth()` and `solve_labyrinth()` methods
 - Color values for different visual elements
 
+## Author : Efrata Melese
+## ID : UGR/6776/16
+## Section : 02
+
+## video
+https://www.awesomescreenshot.com/video/52351006?key=db22d6b4533d9df6d1bebde1060a9801
+
 ## License
 
 This project is open source and available under the MIT License.
